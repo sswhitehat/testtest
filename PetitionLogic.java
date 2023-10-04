@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.List;
 
 public class PetitionLogic {
 
@@ -65,7 +66,7 @@ public class PetitionLogic {
     // Other getters and setters for attributes if needed
 
     public static void main(String[] args) {
-        // Main method declaration only
+        System.out.println("Hello World");
     }
 
 
