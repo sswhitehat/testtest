@@ -7,6 +7,7 @@ class PetitionLogicTest {
 
     @org.junit.jupiter.api.Test
     void getPetition() {
+        assertEquals(PetitionLogic.getPetition(), "Petition for - xxxxxxx");
     }
 
     @org.junit.jupiter.api.Test
