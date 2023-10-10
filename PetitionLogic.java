@@ -34,7 +34,7 @@ public class PetitionLogic {
         return null; 
     }
 
-    public static PetitionLogic getPetition(int petitionId) {
+    public static PetitionLogic getPetition() {
         
         return null; 
     }
@@ -54,13 +54,13 @@ public class PetitionLogic {
         return false; 
     }
 
-    public boolean isValidDOB(String DateOfBirth) {
+    public static boolean isValidDOB(String DateofBirth) {
    
         return false; 
     }
 
     public void checkForDuplicates() {
-      
+
     }
 
     // Other getters and setters for attributes if needed
