@@ -22,6 +22,14 @@ public class PetitionLogic {
             Object petitionData,
             Collection<Criteria> eligibilityCriteria,
             boolean duplicateCheckResults) {
+        this.petitionerName = petitionerName;
+        this.alienFianceeName = alienFianceeName;
+        this.alienChildrenNames = alienChildrenNames;
+        this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
+        this.petitionSubmitted = petitionSubmitted;
+        this.petitionData = petitionData;
+        this.eligibilityCriteria = eligibilityCriteria;
+        this.duplicateCheckResults = duplicateCheckResults;
       
     }
 
@@ -34,8 +42,40 @@ public class PetitionLogic {
      
         return null; 
     }
+    public String getPetitionerName() {
+        return petitionerName;
+    }
 
-    public static PetitionLogic getPetition() {
+    public String getAlienFianceeName() {
+        return alienFianceeName;
+    }
+
+    public String getAlienChildrenNames() {
+        return alienChildrenNames;
+    }
+
+    public boolean isAccessGrantedUnderDifferentImmigrant() {
+        return accessGrantedUnderDifferentImmigrant;
+    }
+
+    public boolean isPetitionSubmitted() {
+        return petitionSubmitted;
+    }
+
+    public Object getPetitionData() {
+        return petitionData;
+    }
+
+    public Collection<Criteria> getEligibilityCriteria() {
+        return eligibilityCriteria;
+    }
+
+    public boolean isDuplicateCheckResults() {
+        return duplicateCheckResults;
+    }
+
+
+    public PetitionLogic getPetition() {
         
         return null; 
     }
