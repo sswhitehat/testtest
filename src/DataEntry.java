@@ -1,3 +1,4 @@
+package src;
 public class DataEntry {
     
     public static void main(String args[]) {

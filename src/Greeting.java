@@ -1,5 +1,6 @@
+package src;
 public class Greeting {
     public Object getMessage(){
-        return null;
+        return "Hello World!";
     }
 }

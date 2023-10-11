@@ -1,4 +1,7 @@
+package unitTests;
 import static org.junit.jupiter.api.Assertions.*;
+
+import src.DataEntry;
 public class DataEntryTest {
     
     @org.junit.jupiter.api.Test

@@ -1,4 +1,7 @@
+package unitTests;
 import static org.junit.jupiter.api.Assertions.*;
+
+import src.PetitionLogic;
 class PetitionLogicTest {
 
     @org.junit.jupiter.api.Test
