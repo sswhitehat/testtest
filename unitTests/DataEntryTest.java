@@ -8,6 +8,6 @@ public class DataEntryTest {
     @Test
     void test() {
         DataEntry entry = new DataEntry();
-        assertEquals(entry.enterData(), "Entered data!");
+        assertEquals("Entered data!", entry.enterData());
     }
 }
