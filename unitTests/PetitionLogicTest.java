@@ -1,39 +1,40 @@
 package unitTests;
 import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 import src.PetitionLogic;
+
 class PetitionLogicTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void createNewPetition() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getPetition() {
         assertEquals(PetitionLogic.getPetition(), "Petition for - xxxxxxx");
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void validatePetition() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void isValidANumber() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void isValidEmail() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void isValidDOB() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void checkForDuplicates() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void main() {
     }
 }
