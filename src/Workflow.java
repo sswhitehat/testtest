@@ -8,12 +8,12 @@ public class Workflow {
     /**
      * Queue for storing reviewer work
      */
-    Queue<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
+    LinkedList<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queue for storing approval work
      */
-    Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
+    LinkedList<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queues work for the reviewer to do
@@ -36,19 +36,18 @@ public class Workflow {
     }
     
     /**
-     * Retrieves work for reviwer to do
+     * Retrieves work for reviewer to do
      * @return PetitionLogic
      */
     public PetitionLogic retrieveReviewWork() {
         
         PetitionLogic work;
         
-        if (approvalQueue.isEmpty())
+        if (reviewQueue.isEmpty())
             work = null;
         
         else
-            work = reviewQueue.peek();
-            reviewQueue.remove();
+            work = approvalQueue.getFirst();
         
         return work;
     }
@@ -65,8 +64,7 @@ public class Workflow {
             work = null;
         
         else
-            work = approvalQueue.peek();
-            approvalQueue.remove();
+            work = approvalQueue.getFirst();
         
         return work;
     }
