@@ -33,7 +33,11 @@ public class PetitionLogic {
             this.duplicateCheckResults = duplicateCheckResults;
       
     }
-
+    
+    public static PetitionLogic createNewPetition() {
+        return null;
+    }
+    
     public static PetitionLogic createNewPetition(
             String petitionerName,
             String alienFianceeName,
