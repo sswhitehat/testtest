@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PetitionLogic {
 
+
     private String petitionerName;
     private String alienFianceeName;
     private String alienChildrenNames;
@@ -22,14 +23,14 @@ public class PetitionLogic {
             Object petitionData,
             Collection<Criteria> eligibilityCriteria,
             boolean duplicateCheckResults) {
-        this.petitionerName = petitionerName;
-        this.alienFianceeName = alienFianceeName;
-        this.alienChildrenNames = alienChildrenNames;
-        this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
-        this.petitionSubmitted = petitionSubmitted;
-        this.petitionData = petitionData;
-        this.eligibilityCriteria = eligibilityCriteria;
-        this.duplicateCheckResults = duplicateCheckResults;
+            this.petitionerName = petitionerName;
+            this.alienFianceeName = alienFianceeName;
+            this.alienChildrenNames = alienChildrenNames;
+            this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
+            this.petitionSubmitted = petitionSubmitted;
+            this.petitionData = petitionData;
+            this.eligibilityCriteria = eligibilityCriteria;
+            this.duplicateCheckResults = duplicateCheckResults;
       
     }
 
@@ -42,6 +43,39 @@ public class PetitionLogic {
      
         return null; 
     }
+
+    public void setPetitionerName(String petitionerName) {
+        this.petitionerName = petitionerName;
+    }
+
+    public void setAlienFianceeName(String alienFianceeName) {
+        this.alienFianceeName = alienFianceeName;
+    }
+
+    public void setAlienChildrenNames(String alienChildrenNames) {
+        this.alienChildrenNames = alienChildrenNames;
+    }
+
+    public void setAccessGrantedUnderDifferentImmigrant(boolean accessGrantedUnderDifferentImmigrant) {
+        this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
+    }
+
+    public void setPetitionSubmitted(boolean petitionSubmitted) {
+        this.petitionSubmitted = petitionSubmitted;
+    }
+
+    public void setPetitionData(Object petitionData) {
+        this.petitionData = petitionData;
+    }
+
+    public void setEligibilityCriteria(Collection<Criteria> eligibilityCriteria) {
+        this.eligibilityCriteria = eligibilityCriteria;
+    }
+
+    public void setDuplicateCheckResults(boolean duplicateCheckResults) {
+        this.duplicateCheckResults = duplicateCheckResults;
+    }
+
     public String getPetitionerName() {
         return petitionerName;
     }

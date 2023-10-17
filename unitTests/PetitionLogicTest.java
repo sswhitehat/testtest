@@ -28,7 +28,7 @@ class PetitionLogicTest {
         assertEquals("Child1, Child2", alienChildrenNames);
         assertFalse(accessGrantedUnderDifferentImmigrant);
         assertTrue(petitionSubmitted);
-        assertTrue(petitionData != null);
+        assertNotNull(petitionData);
         assertFalse(duplicateCheckResults);
     }
 
