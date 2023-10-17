@@ -8,12 +8,12 @@ public class Workflow {
     /**
      * Queue for storing reviewer work
      */
-    LinkedList<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
+    Queue<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queue for storing approval work
      */
-    LinkedList<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
+    Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queues work for the reviewer to do
@@ -43,11 +43,11 @@ public class Workflow {
         
         PetitionLogic work;
         
-        if (reviewQueue.isEmpty())
+        if (reviewQueue.peek() == null)
             work = null;
         
         else
-            work = approvalQueue.getFirst();
+            work = reviewQueue.remove();
         
         return work;
     }
@@ -60,11 +60,11 @@ public class Workflow {
         
         PetitionLogic work;
         
-        if (approvalQueue.isEmpty())
+        if (approvalQueue.peek() == null)
             work = null;
         
         else
-            work = approvalQueue.getFirst();
+            work = approvalQueue.remove();
         
         return work;
     }
