@@ -36,14 +36,14 @@ public class Workflow {
     }
     
     /**
-     * Retrieves work for reviwer to do
+     * Retrieves work for reviewer to do
      * @return PetitionLogic
      */
     public PetitionLogic retrieveReviewWork() {
         
         PetitionLogic work;
         
-        if (approvalQueue.isEmpty())
+        if (reviewQueue.isEmpty())
             work = null;
         
         else
