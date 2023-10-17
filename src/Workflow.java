@@ -30,7 +30,7 @@ public class Workflow {
      * @return Always returns true
      */
     public boolean queueApprovalWork(PetitionLogic work) {
-        boolean ret = reviewQueue.add(work);
+        boolean ret = approvalQueue.add(work);
         return ret;
     }
     

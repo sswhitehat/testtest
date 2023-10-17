@@ -11,7 +11,14 @@ class PetitionLogicTest {
 
     @Test
     void testGetPetition() {
-        PetitionLogic petitionLogic = new PetitionLogic("John Doe", "Jane Smith", "Child1, Child2", false, true, new Object(), null, false);
+        PetitionLogic petitionLogic = new PetitionLogic("John Doe",
+        "Jane Smith",
+        "Child1, Child2",
+        false,
+        true,
+        new Object(),
+        false,
+        false);
 
         // Access private fields using the getter methods
         String petitionerName = petitionLogic.getPetitionerName();

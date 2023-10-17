@@ -12,40 +12,69 @@ public class WorkflowTest {
     //     assertEquals("New item!", wf.insertItem("New item!"));
     // }
     
+    
     /**
-     * Tests storing and retrieving items from the review workflow queue
+     * Tests storing an petition in the review queue
+     */
+    @Test
+    void storingReviewItems() {
+        Workflow wf = new Workflow();
+        PetitionLogic petition1 = new PetitionLogic();
+        boolean ret = wf.queueReviewWork(petition1);
+        assert(ret == true);
+    }
+    
+    /**
+     * Tests storing an petition in the review queue
+     */
+    @Test
+    void storingApprovalItems() {
+        Workflow wf = new Workflow();
+        PetitionLogic petition1 = new PetitionLogic();
+        boolean ret = wf.queueApprovalWork(petition1);
+        assert(ret == true);
+    }
+    
+    /**
+     * Tests storing and retrieving petitions from the review workflow queue
      */
     @Test
     void storingAndRetrievingReviewItems() {
         
         Workflow wf = new Workflow();
-        PetitionLogic item1, item2, item3 = createNewPetition();
         
-        wf.queueReviewWork(item1);
-        wf.queueReviewWork(item2);
-        wf.queueReviewWork(item3);
+        PetitionLogic petition1 = new PetitionLogic();
+        PetitionLogic petition2 = new PetitionLogic();
+        PetitionLogic petition3 = new PetitionLogic();
+        
+        wf.queueReviewWork(petition1);
+        wf.queueReviewWork(petition2);
+        wf.queueReviewWork(petition3);
         
         PetitionLogic returnedItem = wf.retrieveReviewWork();
         
         assert(returnedItem != null);
-        assertEquals(item1, returnedItem);
+        assertEquals(petition1, returnedItem);
     }
     /**
-     * Tests storing and retrieving items from the approval workflow queue
+     * Tests storing and retrieving petitions from the approval workflow queue
      */    
     @Test
     void storingAndRetrievingApprovalItems() {
         
         Workflow wf = new Workflow();
-        PetitionLogic item1, item2, item3 = createNewPetition();
         
-        wf.queueApprovalWork(item1);
-        wf.queueApprovalWork(item2);
-        wf.queueApprovalWork(item3);
+        PetitionLogic petition1 = new PetitionLogic();
+        PetitionLogic petition2 = new PetitionLogic();
+        PetitionLogic petition3 = new PetitionLogic();
+        
+        wf.queueApprovalWork(petition1);
+        wf.queueApprovalWork(petition2);
+        wf.queueApprovalWork(petition3);
         
         PetitionLogic returnedItem = wf.retrieveApprovalWork();
         
         assert(returnedItem != null);
-        assertEquals(item1, returnedItem);
+        assertEquals(petition1, returnedItem);
     }
 }

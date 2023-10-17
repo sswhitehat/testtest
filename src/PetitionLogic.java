@@ -1,5 +1,4 @@
 package src;
-import java.util.Collection;
 import java.util.List;
 
 public class PetitionLogic {
@@ -11,7 +10,7 @@ public class PetitionLogic {
     private boolean accessGrantedUnderDifferentImmigrant;
     private boolean petitionSubmitted;
     private Object petitionData;
-    private Collection<Criteria> eligibilityCriteria;
+    private boolean eligibilityCriteria;
     private boolean duplicateCheckResults;
 
     public PetitionLogic(
@@ -21,7 +20,7 @@ public class PetitionLogic {
             boolean accessGrantedUnderDifferentImmigrant,
             boolean petitionSubmitted,
             Object petitionData,
-            Collection<Criteria> eligibilityCriteria,
+            boolean eligibilityCriteria,
             boolean duplicateCheckResults) {
             this.petitionerName = petitionerName;
             this.alienFianceeName = alienFianceeName;
@@ -34,18 +33,32 @@ public class PetitionLogic {
       
     }
     
-    public static PetitionLogic createNewPetition() {
-        return null;
+    public PetitionLogic() {
+        this.petitionerName = "";
+        this.alienFianceeName = "";
+        this.alienChildrenNames = "";
+        this.accessGrantedUnderDifferentImmigrant = false;
+        this.petitionSubmitted = false;
+        this.petitionData = null;
+        this.eligibilityCriteria = false;
+        this.duplicateCheckResults = false;
     }
     
-    public static PetitionLogic createNewPetition(
+    public PetitionLogic(
             String petitionerName,
             String alienFianceeName,
             String alienChildrenNames,
             Object petitionData,
-            Collection<Criteria> eligibilityCriteria) {
-     
-        return null; 
+            boolean eligibilityCriteria) {
+        
+        this.petitionerName = petitionerName;
+        this.alienFianceeName = alienFianceeName;
+        this.alienChildrenNames = alienChildrenNames;
+        this.accessGrantedUnderDifferentImmigrant = false;
+        this.petitionSubmitted = false;
+        this.petitionData = petitionData;
+        this.eligibilityCriteria = false;
+        this.duplicateCheckResults = false;
     }
 
     public void setPetitionerName(String petitionerName) {
@@ -72,7 +85,7 @@ public class PetitionLogic {
         this.petitionData = petitionData;
     }
 
-    public void setEligibilityCriteria(Collection<Criteria> eligibilityCriteria) {
+    public void setEligibilityCriteria(boolean eligibilityCriteria) {
         this.eligibilityCriteria = eligibilityCriteria;
     }
 
@@ -104,7 +117,7 @@ public class PetitionLogic {
         return petitionData;
     }
 
-    public Collection<Criteria> getEligibilityCriteria() {
+    public boolean getEligibilityCriteria() {
         return eligibilityCriteria;
     }
 
@@ -148,8 +161,4 @@ public class PetitionLogic {
         System.out.println("Hello World");
     }
 
-
-    private class Criteria {
-
-    }
 }
