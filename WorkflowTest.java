@@ -55,6 +55,16 @@ public class WorkflowTest {
         
         assert(returnedItem != null);
         assertEquals(petition1, returnedItem);
+        
+        returnedItem = wf.retrieveReviewWork();
+        
+        assert(returnedItem != null);
+        assertEquals(petition2, returnedItem);
+        
+        returnedItem = wf.retrieveReviewWork();
+        
+        assert(returnedItem != null);
+        assertEquals(petition3, returnedItem);
     }
     /**
      * Tests storing and retrieving petitions from the approval workflow queue
@@ -76,5 +86,15 @@ public class WorkflowTest {
         
         assert(returnedItem != null);
         assertEquals(petition1, returnedItem);
+        
+        returnedItem = wf.retrieveApprovalWork();
+        
+        assert(returnedItem != null);
+        assertEquals(petition2, returnedItem);
+        
+        returnedItem = wf.retrieveApprovalWork();
+        
+        assert(returnedItem != null);
+        assertEquals(petition3, returnedItem);
     }
 }

@@ -43,12 +43,17 @@ public class Workflow {
         
         PetitionLogic work;
         
-        if (reviewQueue.isEmpty())
+        if (reviewQueue.peek() == null)
             work = null;
         
         else
+<<<<<<< HEAD
             work = reviewQueue.peek();
 
+=======
+            work = reviewQueue.remove();
+        
+>>>>>>> a59305037c770ad1a33385138570c49c2ac853df
         return work;
     }
     
@@ -60,11 +65,15 @@ public class Workflow {
         
         PetitionLogic work;
         
-        if (approvalQueue.isEmpty())
+        if (approvalQueue.peek() == null)
             work = null;
         
         else
+<<<<<<< HEAD
             work = approvalQueue.peek();
+=======
+            work = approvalQueue.remove();
+>>>>>>> a59305037c770ad1a33385138570c49c2ac853df
         
         return work;
     }
