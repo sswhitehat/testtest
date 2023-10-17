@@ -1,18 +1,19 @@
 package src;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Workflow {
     
     /**
      * Queue for storing reviewer work
      */
-    LinkedList<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
+    Queue<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queue for storing approval work
      */
-    LinkedList<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
+    Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queues work for the reviewer to do
@@ -46,7 +47,8 @@ public class Workflow {
             work = null;
         
         else
-            work = reviewQueue.removeFirst();
+            work = reviewQueue.peek();
+            reviewQueue.remove();
         
         return work;
     }
@@ -63,7 +65,8 @@ public class Workflow {
             work = null;
         
         else
-            work = approvalQueue.removeFirst();
+            work = approvalQueue.peek();
+            approvalQueue.remove();
         
         return work;
     }
