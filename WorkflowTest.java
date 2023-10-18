@@ -97,4 +97,24 @@ public class WorkflowTest {
         assert(returnedItem != null);
         assertEquals(petition3, returnedItem);
     }
+    /*
+     * Tests storing and retrieving null petitions from the review workflow queue
+     */
+    @Test
+    void storingAndRetrievingReviewNullItems(){
+        Workflow wf = new Workflow();
+        PetitionLogic returnedItem = wf.retrieveReviewWork();
+
+        assert(returnedItem == null);
+    }
+    /**
+     * Tests storing and retrieving null petitions from the approval workflow queue
+     */ 
+    @Test
+    void storingAndRetrievingApprovalNullItems(){
+        Workflow wf = new Workflow();
+        PetitionLogic returnedItem = wf.retrieveApprovalWork();
+
+        assert(returnedItem == null);
+    }
 }

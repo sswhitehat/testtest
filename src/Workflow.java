@@ -16,6 +16,13 @@ public class Workflow {
     Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
     
     /**
+     * Constructor for Workflow
+     */
+    public Workflow(){
+        this.reviewQueue = null;
+        this.approvalQueue = null;
+    }
+    /**
      * Queues work for the reviewer to do
      * @param work for reviewer
      * @return Always returns true
