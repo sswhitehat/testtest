@@ -1,8 +1,10 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+package unitTests;
 
+import org.junit.jupiter.api.Test;
 import src.PetitionLogic;
 import src.Workflow;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WorkflowTest { 
   
