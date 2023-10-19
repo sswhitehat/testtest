@@ -13,7 +13,7 @@ public class PetitionLogic {
     private boolean eligibilityCriteria;
     private boolean duplicateCheckResults;
 
-    public PetitionLogic(
+    private PetitionLogic(
             String petitionerName,
             String alienFianceeName,
             String alienChildrenNames,
@@ -136,7 +136,7 @@ public class PetitionLogic {
         return null; 
     }
 
-    public boolean isValidANumber(int ANumber) {
+    public boolean isValidANumber(Integer ANumber) {
         
         return false; 
     }
@@ -151,8 +151,9 @@ public class PetitionLogic {
         return false; 
     }
 
-    public void checkForDuplicates() {
+    public boolean checkForDuplicates() {
 
+        return false;
     }
 
     // Other getters and setters for attributes if needed
@@ -161,4 +162,7 @@ public class PetitionLogic {
         System.out.println("Hello World");
     }
 
+    public Object createNewPetition() {
+        return null;
+    }
 }
