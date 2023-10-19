@@ -1,4 +1,4 @@
-package org.example;
+package MAVEN_SETUP.src.test.java.org.example;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

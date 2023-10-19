@@ -8,19 +8,19 @@ public class Workflow {
     /**
      * Queue for storing reviewer work
      */
-    Queue<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
+    private Queue<PetitionLogic> reviewQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Queue for storing approval work
      */
-    Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
+    private Queue<PetitionLogic> approvalQueue = new LinkedList<PetitionLogic>();
     
     /**
      * Constructor for Workflow
      */
     public Workflow(){
-        this.reviewQueue = null;
-        this.approvalQueue = null;
+        this.reviewQueue = new LinkedList<PetitionLogic>();
+        this.approvalQueue = new LinkedList<PetitionLogic>();
     }
     /**
      * Queues work for the reviewer to do

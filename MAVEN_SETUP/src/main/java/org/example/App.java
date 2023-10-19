@@ -1,4 +1,4 @@
-package org.example;
+package MAVEN_SETUP.src.main.java.org.example;
 
 /**
  * Hello world!
