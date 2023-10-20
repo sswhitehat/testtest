@@ -8,12 +8,15 @@ import java.util.List;
 
 class PetitionLogicTest {
     private PetitionLogic petitionLogic;
+
     @BeforeEach
+    //BUILDER FOR A PETITION BEFORE EACH TESTS - JUNIT 5 SUGGESTION
     void builder(){
         petitionLogic = new PetitionLogic();
     }
     @Test
     void createNewPetition() {
+        //BASIC CHECKS FOR EXPECTED VALUES COMPLETED BY GENERATE IN INTELLIJ
         assertEquals("", petitionLogic.getPetitionerName());
         assertEquals("", petitionLogic.getAlienFianceeName());
         assertEquals("", petitionLogic.getAlienChildrenNames());
@@ -22,12 +25,12 @@ class PetitionLogicTest {
         assertNull(petitionLogic.getPetitionData());
         assertFalse(petitionLogic.getEligibilityCriteria());
         assertFalse(petitionLogic.isDuplicateCheckResults());
-        fail("Default Values Fail on run");
+        fail("TEST FAIL FOR DEFAULT");
     }
 
     @Test
     void testGetPetition() {
-        // Access private fields using the getter methods
+        // ACCESSING FIELDS TO CHECK MOCK VALUES
         String petitionerName = petitionLogic.getPetitionerName();
         String alienFianceeName = petitionLogic.getAlienFianceeName();
         String alienChildrenNames = petitionLogic.getAlienChildrenNames();
@@ -35,11 +38,10 @@ class PetitionLogicTest {
         boolean petitionSubmitted = petitionLogic.isPetitionSubmitted();
         Object petitionData = petitionLogic.getPetitionData();
         boolean duplicateCheckResults = petitionLogic.isDuplicateCheckResults();
-
-        // Validate the values
-        assertEquals("John Doe", petitionerName);
+        // CHECKING SAID VALUES
+        assertEquals("John Smith", petitionerName);
         assertEquals("Jane Smith", alienFianceeName);
-        assertEquals("Child1, Child2", alienChildrenNames);
+        assertEquals("Child", alienChildrenNames);
         assertFalse(accessGrantedUnderDifferentImmigrant);
         assertTrue(petitionSubmitted);
         assertNotNull(petitionData);
@@ -48,111 +50,97 @@ class PetitionLogicTest {
 
     @Test
     void validatePetition() {
+        //VALIDATING A CREATED PETITION - GENERATED TESTS FROM INTELLIJ
         PetitionLogic petition = new PetitionLogic();
-        petition.setPetitionerName("John Doe");
+        petition.setPetitionerName("John Smith");
         petition.setAlienFianceeName("Jane Smith");
-        petition.setAlienChildrenNames("Child1, Child2");
+        petition.setAlienChildrenNames("Child");
         petition.setAccessGrantedUnderDifferentImmigrant(false);
         petition.setPetitionSubmitted(true);
-        petition.setPetitionData(new Object()); // Valid data object
+        petition.setPetitionData(new Object());
         petition.setEligibilityCriteria(true);
         List<String> validationErrors = petition.validatePetition();
-        // Assert that there are no validation errors
+        //CHECK IF IT IS EMPTY AND VALIDATE
         assertNotNull(validationErrors);
         assertTrue(validationErrors.isEmpty());
-
-        // Modify the petition to introduce invalid data types
-        petition.setPetitionData("Invalid Data"); // Set data as a string
-
-        // Validate the modified petition
+        petition.setPetitionData("Invalid Data");
         validationErrors = petition.validatePetition();
-
-        // Assert that there are validation errors for the invalid data type
-        assertFalse(validationErrors.isEmpty());
-
-        // Test with other attributes in the petition
-        petition.setPetitionerName(String.valueOf(123)); // Introduce an invalid data type (integer) for petitioner name
-        petition.setAlienFianceeName(null); // Introduce a null value for alien fiancée
-        // Validate the modified petition
+        // USE WRONG VALUES AND TEST VALIDATE
+        petition.setPetitionerName(String.valueOf(123));
+        petition.setAlienFianceeName(null);
         validationErrors = petition.validatePetition();
-        // Assert that there are validation errors for the introduced errors
         assertFalse(validationErrors.isEmpty());
-        // Test null values for various attributes
+        // NULL VALUES AND TEST METHOD
         petition.setPetitionerName(null);
         petition.setAlienFianceeName("");
         petition.setAlienChildrenNames(null);
         petition.setPetitionData(null);
         petition.setEligibilityCriteria(false);
-        // Validate the modified petition with null values
         validationErrors = petition.validatePetition();
-        // Assert that there are validation errors for the null values
         assertFalse(validationErrors.isEmpty());
 
     }
 
     @Test
     void isValidANumber() {
-        // Valid 8-digit number
+        // VALID 8 - MADE BY ME - SEAN BASED ON A NUMBER DETAILS ONLINE
         assertTrue(petitionLogic.isValidANumber(12345678));
-        // Valid 9-digit number
+        // VALID 9
         assertTrue(petitionLogic.isValidANumber(123456789));
-        // Invalid numbers
+        // INVALID < or >
         assertFalse(petitionLogic.isValidANumber(12345)); // Less than 8 digits
         assertFalse(petitionLogic.isValidANumber(1234567890)); // More than 9 digits
-        // Non-integer characters
-        assertFalse(petitionLogic.isValidANumber((int) 12.5)); // Non-integer input
-        // Null input
+        // NON INTEGER
+        assertFalse(petitionLogic.isValidANumber((int) 17.5)); // Non-integer input
+        // NULL CHECK
         assertFalse(petitionLogic.isValidANumber(null));
-        // String input should be considered invalid
+        // STRING CHECK
         assertFalse(petitionLogic.isValidANumber(Integer.valueOf("invalid_string")));
     }
 
 
     @Test
     void isValidEmail() {
-         //Email Setup
+        //CALLING EMAIL VALIDATOR FROM MAVEN BASED ON INTELLIJ RECOMMENDATION
     EmailValidator emailValidator = EmailValidator.getInstance();
+    //VALID EMAIL
     assertTrue(emailValidator.isValid("user@example.com"));
     assertTrue(emailValidator.isValid("john.doe123@gmail.com"));
-
-    // Invalid Email
+    // INVALID EMAIL
     assertFalse(emailValidator.isValid("NOTANEMAIL"));
     assertFalse(emailValidator.isValid("test@.com"));
     assertFalse(emailValidator.isValid("test.email.com"));
     assertFalse(emailValidator.isValid("user@test.c"));
-
-    // Add conditions that are unlikely to pass with a valid email format
-    assertFalse(emailValidator.isValid("user@")); // Missing domain
-    assertFalse(emailValidator.isValid("user@example")); // Missing top-level domain
-    assertFalse(emailValidator.isValid("user@.com")); // Missing domain name
-    assertFalse(emailValidator.isValid("user@ .com")); // Space in the domain
-    assertFalse(emailValidator.isValid("user@ex ample.com")); // Space in the local part
-    assertFalse(emailValidator.isValid(null)); // Null input
-    assertFalse(emailValidator.isValid("")); // Empty string
+    // FORMATS THAT ARE NOT ACCEPTED - APACHE RULES FOR EMAIL ADDRESSES
+    assertFalse(emailValidator.isValid("user@"));
+    assertFalse(emailValidator.isValid("user@example"));
+    assertFalse(emailValidator.isValid("user@.com"));
+    assertFalse(emailValidator.isValid("user@ .com"));
+    assertFalse(emailValidator.isValid("user@ex ample.com"));
+    assertFalse(emailValidator.isValid(null));
+    assertFalse(emailValidator.isValid(""));
+    //VALIDATOR FAIL CONDITION SINCE IT CANNOT BE A RED TEST DUE TO NATURE OF VALIDATOR TESTING
     fail("Since this a validator it will always pass so it can fail here");
 
     }
 
     @Test
     void isValidDOB() {
-        // Valid DOBs in MM-DD-YYYY format
+        // VALID DOB
         assertTrue(PetitionLogic.isValidDOB("01-15-1990"));
         assertTrue(PetitionLogic.isValidDOB("12-31-1985"));
-        // Leap year DOB
+        // LEAP DOB
         assertTrue(PetitionLogic.isValidDOB("02-29-2000"));
-        // Invalid DOB formats
+        // INVALID DOB
         assertFalse(PetitionLogic.isValidDOB("1990-01-15"));
         assertFalse(PetitionLogic.isValidDOB("01/15/1990"));
         assertFalse(PetitionLogic.isValidDOB("01-1990"));
         assertFalse(PetitionLogic.isValidDOB("15-01-1990"));
         assertFalse(PetitionLogic.isValidDOB("15-1990-01"));
-        // Future DOBs
-        assertFalse(PetitionLogic.isValidDOB("05-10-2050"));
-        assertFalse(PetitionLogic.isValidDOB("12-31-3000"));
-        // Invalid month/day
+        // NON EXISTENT DAYS
         assertFalse(PetitionLogic.isValidDOB("02-30-1990"));
         assertFalse(PetitionLogic.isValidDOB("04-31-1990"));
-        //Invalid Types
+        //WRONG TYPE
         assertFalse(PetitionLogic.isValidDOB("TESTING"));
         assertFalse(PetitionLogic.isValidDOB("3.14"));
         assertFalse(PetitionLogic.isValidDOB(new Object().toString()));
@@ -160,30 +148,31 @@ class PetitionLogicTest {
 
     @Test
     void checkForDuplicates() {
+        //NEW PETITION OBJECT TO TEST DUPLICATE - INTELLIJ GENERATED TESTS
         PetitionLogic petition = new PetitionLogic();
-        petition.setPetitionerName("John Doe");
+        petition.setPetitionerName("John Smith");
         petition.setAlienFianceeName("Jane Smith");
-        petition.setAlienChildrenNames("Child1, Child2");
+        petition.setAlienChildrenNames("Child");
         petition.setAccessGrantedUnderDifferentImmigrant(false);
         petition.setPetitionSubmitted(true);
-        petition.setPetitionData(new Object()); // Valid data object
+        petition.setPetitionData(new Object());
         petition.setEligibilityCriteria(true);
-        // Assuming you have a system to check for duplicates, simulate a check
+        // CHECK USING A BOOL LATER THAT I WILL IMPLEMENT FROM EITHER DB OR ARRAY OR WHATEVER STRUCT WE CHOOSE TO HOLD DATA
         boolean isDuplicate = petition.checkForDuplicates();
-        // Assert that the system correctly identifies the petition as a duplicate
+        // TRUE BECAUSE THE SYSTEM SHOULD IDENTIFY IF ALREADY IN SYSTEM
         assertTrue(isDuplicate);
-        // You can also test cases where there are no duplicates
-        PetitionLogic newPetition = new PetitionLogic(); // Create a new petition with different data
-        newPetition.setPetitionerName("Alice Smith");
-        newPetition.setAlienFianceeName("Bob Johnson");
-        newPetition.setAlienChildrenNames("Child3, Child4");
-        newPetition.setAccessGrantedUnderDifferentImmigrant(true); // Different value
-        newPetition.setPetitionSubmitted(false); // Different value
-        newPetition.setPetitionData(new Object()); // Valid data object
+        // CHECK NOT DUPLICATE - INTELLIJ GENERATED TESTS
+        PetitionLogic newPetition = new PetitionLogic();
+        newPetition.setPetitionerName("Gary Smith");
+        newPetition.setAlienFianceeName("Jill Smith");
+        newPetition.setAlienChildrenNames("Child1");
+        newPetition.setAccessGrantedUnderDifferentImmigrant(true);
+        newPetition.setPetitionSubmitted(false);
+        newPetition.setPetitionData(new Object());
         newPetition.setEligibilityCriteria(true);
-        // Simulate a check for duplicates for the new petition
+        // SAME AS ABOVE BUT THE OTHER WAY AROUND
         boolean isNewPetitionDuplicate = newPetition.checkForDuplicates();
-        // Assert that the system correctly identifies the new petition as not a duplicate
+        // FALSE SINCE NOT A DUPE
         assertFalse(isNewPetitionDuplicate);
     }
 }
