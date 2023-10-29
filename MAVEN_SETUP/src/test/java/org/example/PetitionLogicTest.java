@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-// import src.PetitionLogic;
 import java.util.List;
 
 class PetitionLogicTest {
