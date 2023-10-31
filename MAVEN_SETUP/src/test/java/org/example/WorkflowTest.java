@@ -19,7 +19,7 @@ public class WorkflowTest {
         Workflow wf = new Workflow();
         PetitionLogic petition1 = new PetitionLogic();
         boolean ret = wf.queueReviewWork(petition1);
-        assert(ret == true);
+        assert(ret);
     }
     
     /**
@@ -30,7 +30,7 @@ public class WorkflowTest {
         Workflow wf = new Workflow();
         PetitionLogic petition1 = new PetitionLogic();
         boolean ret = wf.queueApprovalWork(petition1);
-        assert(ret == true);
+        assert(ret);
     }
     
     /**
