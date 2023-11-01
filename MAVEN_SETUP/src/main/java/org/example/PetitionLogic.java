@@ -1,17 +1,25 @@
 package org.example;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PetitionLogic {
 
 
     private String petitionerName;
+
+    private static final Map<String, PetitionData> STRING_PETITION_DATA_HASH_MAP = new HashMap<>();
+
     private String alienFianceeName;
     private String alienChildrenNames;
     private boolean accessGrantedUnderDifferentImmigrant;
     private boolean petitionSubmitted;
     private Object petitionData;
-    private boolean eligibilityCriteria;
     private boolean duplicateCheckResults;
+
 
     private PetitionLogic(
             String petitionerName,
@@ -20,45 +28,15 @@ public class PetitionLogic {
             boolean accessGrantedUnderDifferentImmigrant,
             boolean petitionSubmitted,
             Object petitionData,
-            boolean eligibilityCriteria,
             boolean duplicateCheckResults) {
-            this.petitionerName = petitionerName;
-            this.alienFianceeName = alienFianceeName;
-            this.alienChildrenNames = alienChildrenNames;
-            this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
-            this.petitionSubmitted = petitionSubmitted;
-            this.petitionData = petitionData;
-            this.eligibilityCriteria = eligibilityCriteria;
-            this.duplicateCheckResults = duplicateCheckResults;
-      
-    }
-    
-    public PetitionLogic() {
-        this.petitionerName = "";
-        this.alienFianceeName = "";
-        this.alienChildrenNames = "";
-        this.accessGrantedUnderDifferentImmigrant = false;
-        this.petitionSubmitted = false;
-        this.petitionData = null;
-        this.eligibilityCriteria = false;
-        this.duplicateCheckResults = false;
-    }
-    
-    public PetitionLogic(
-            String petitionerName,
-            String alienFianceeName,
-            String alienChildrenNames,
-            Object petitionData,
-            boolean eligibilityCriteria) {
-        
         this.petitionerName = petitionerName;
         this.alienFianceeName = alienFianceeName;
         this.alienChildrenNames = alienChildrenNames;
-        this.accessGrantedUnderDifferentImmigrant = false;
-        this.petitionSubmitted = false;
+        this.accessGrantedUnderDifferentImmigrant = accessGrantedUnderDifferentImmigrant;
+        this.petitionSubmitted = petitionSubmitted;
         this.petitionData = petitionData;
-        this.eligibilityCriteria = false;
-        this.duplicateCheckResults = false;
+        this.duplicateCheckResults = duplicateCheckResults;
+
     }
 
     public void setPetitionerName(String petitionerName) {
@@ -85,9 +63,6 @@ public class PetitionLogic {
         this.petitionData = petitionData;
     }
 
-    public void setEligibilityCriteria(boolean eligibilityCriteria) {
-        this.eligibilityCriteria = eligibilityCriteria;
-    }
 
     public void setDuplicateCheckResults(boolean duplicateCheckResults) {
         this.duplicateCheckResults = duplicateCheckResults;
@@ -117,38 +92,38 @@ public class PetitionLogic {
         return petitionData;
     }
 
-    public boolean getEligibilityCriteria() {
-        return eligibilityCriteria;
-    }
-
     public boolean isDuplicateCheckResults() {
         return duplicateCheckResults;
     }
 
 
     public PetitionLogic getPetition() {
-        
-        return null; 
+
+        return null;
     }
 
     public List<String> validatePetition() {
-       
-        return null; 
+
+        return null;
     }
 
-    public boolean isValidANumber(Integer ANumber) {
-        
-        return false; 
+    public boolean isValidANumber(Integer aNumber) {
+
+        return false;
     }
 
-    public boolean isValidEmail(String email) {
-      
-        return false; 
+    public static boolean isValidEmail(String email) {
+        return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 
     public static boolean isValidDOB(String DateofBirth) {
-   
-        return false; 
+
+        try {
+            LocalDate.parse(DateofBirth, DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     public boolean checkForDuplicates() {
@@ -156,13 +131,39 @@ public class PetitionLogic {
         return false;
     }
 
+    public static void addPetition(String key, PetitionData data) {
+        STRING_PETITION_DATA_HASH_MAP.put(key, data);
+    }
+
+    public static PetitionData getPetition(String key) {
+        return STRING_PETITION_DATA_HASH_MAP.get(key);
+    }
     // Other getters and setters for attributes if needed
 
-    public static void main(String[] args) {
-        System.out.println("Hello World");
-    }
 
     public Object createNewPetition() {
         return null;
+    }
+
+
+    static class PetitionData {
+        String petitionerName;
+        String alienFianceeName;
+        String alienChildrenNames;
+        int isValidANumber;
+        String isValidEmail;
+        String isValidDOB;
+
+        public String toString() {
+            return "PetitionData{" +
+                    "petitionerName='" + petitionerName + '\'' +
+                    ", alienFianceeName='" + alienFianceeName + '\'' +
+                    ", alienChildrenNames='" + alienChildrenNames + '\'' +
+                    ", isValidANumber=" + isValidANumber +
+                    ", isValidEmail=" + isValidEmail +
+                    ", isValidDOB=" + isValidDOB +
+                    // ... other fields ...
+                    '}';
+        }
     }
 }
