@@ -67,7 +67,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.DataEntryScreen</mainClass>
+              <mainClass>org.example.ReviewScreen</mainClass>
             </configuration>
           </execution>
         </executions>

@@ -6,10 +6,38 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class PetitionLogic {
+    
+    String petitionerName;
+    String alienFianceeName;
+    String alienChildrenNames;
+    Boolean isValidANumber;
+    Boolean isValidEmail;
+    Boolean isValidDOB;
 
     // Constructor
     public PetitionLogic() {
-        // Initialization if needed
+        this.petitionerName = "";
+        this.alienFianceeName = "";
+        this.alienChildrenNames = "";
+        this.isValidANumber = false;
+        this.isValidEmail = false;
+        this.isValidDOB = false;
+    }
+    
+    // Constructor
+    public PetitionLogic(String petitionerName,
+    String alienFianceeName,
+    String alienChildrenNames,
+    Boolean isValidANumber,
+    Boolean isValidEmail,
+    Boolean isValidDOB) {
+        
+        this.petitionerName = petitionerName;
+        this.alienFianceeName = alienFianceeName;
+        this.alienChildrenNames = alienChildrenNames;
+        this.isValidANumber = isValidANumber;
+        this.isValidEmail = isValidEmail;
+        this.isValidDOB = isValidDOB;
     }
 
     // Method to validate the petition data
@@ -40,15 +68,15 @@ public class PetitionLogic {
 
     // Other business logic methods as needed
 
-    // Nested class for PetitionData (if still needed)
-    public static class PetitionData {
-        String petitionerName;
-        String alienFianceeName;
-        String alienChildrenNames;
-        int isValidANumber;
-        String isValidEmail;
-        String isValidDOB;
+    // // Nested class for PetitionData (if still needed)
+    // public static class PetitionData {
+    //     String petitionerName;
+    //     String alienFianceeName;
+    //     String alienChildrenNames;
+    //     int isValidANumber;
+    //     String isValidEmail;
+    //     String isValidDOB;
 
-        // toString method and other methods as needed
-    }
+    //     // toString method and other methods as needed
+    // }
 }

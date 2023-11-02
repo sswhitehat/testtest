@@ -44,7 +44,7 @@ public class Workflow {
     
     /**
      * Retrieves work for reviewer to do
-     * @return PetitionLogic
+     * @return PetitionLogic or null if no work to do
      */
     public PetitionLogic retrieveReviewWork() {
         
@@ -61,7 +61,7 @@ public class Workflow {
     
     /**
      * Retrieves work for the approver to do
-     * @return PetitionLogic
+     * @return PetitionLogic or null if no work to do
      */
     public PetitionLogic retrieveApprovalWork() {
         
