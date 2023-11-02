@@ -1,9 +1,8 @@
 org\example\PetitionLogic$PetitionData.class
-org\example\ReviewScreen.class
+org\example\PetitionDataStorage.class
 org\example\Workflow.class
 org\example\Approve.class
 org\example\DataEntryScreen.class
 org\example\PetitionLogic.class
-org\example\Greeting.class
 org\example\DataEntry.class
 org\example\Review.class

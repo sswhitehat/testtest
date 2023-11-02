@@ -11,6 +11,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <java.version>19</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>19</maven.compiler.source>
     <maven.compiler.target>19</maven.compiler.target>
@@ -55,16 +56,43 @@
     </dependency>
     <!-- Additional JavaFX modules can be added as needed -->
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.6</version> <!-- Specify the version you want to use -->
-        <configuration>
-          <mainClass>org.example.DataEntryScreen</mainClass>
-        </configuration>
+        <version>0.0.6</version>
+        <executions>
+          <execution>
+            <id>default-cli</id>
+            <configuration>
+              <mainClass>org.example.DataEntryScreen</mainClass>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>DataEntry</id>
+      <properties>
+        <javafx.main.class>org.example.DataEntryScreen</javafx.main.class>
+      </properties>
+    </profile>
+    <profile>
+      <id>Review</id>
+      <properties>
+        <javafx.main.class>org.example.ReviewScreen</javafx.main.class>
+      </properties>
+    </profile>
+    <profile>
+      <id>Approval</id>
+      <properties>
+        <javafx.main.class>org.example.ApprovalScreen</javafx.main.class>
+      </properties>
+    </profile>
+  </profiles>
 </project>

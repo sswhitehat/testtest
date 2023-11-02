@@ -1,5 +1,4 @@
 package org.example;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,68 +22,103 @@ public class DataEntryScreen extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        // Text fields
+        //Header
+        Label headerLabel = new Label("Petition for Alien Fiancé(e) and Children");
+        headerLabel.setStyle("-fx-font-size: 20px; -fx-underline: true;");
+        grid.add(headerLabel, 0, 0, 4, 1); // Updated to span 4 columns
+        GridPane.setMargin(headerLabel, new Insets(0, 0, 30, 0));
+
+        // Text fields with direct styling
         TextField petitionerNameField = new TextField();
+        petitionerNameField.setPrefWidth(300);
+        petitionerNameField.setStyle("-fx-padding: 5;");
+
         TextField alienFianceeNameField = new TextField();
+        alienFianceeNameField.setPrefWidth(300);
+        alienFianceeNameField.setStyle("-fx-padding: 5;");
+
         TextField alienChildrenNamesField = new TextField();
+        alienChildrenNamesField.setPrefWidth(300);
+        alienChildrenNamesField.setStyle("-fx-padding: 5;");
+
         TextField isValidANumberField = new TextField();
+        isValidANumberField.setPrefWidth(300);
+        isValidANumberField.setStyle("-fx-padding: 5;");
+
         TextField isValidEmailField = new TextField();
+        isValidEmailField.setPrefWidth(300);
+        isValidEmailField.setStyle("-fx-padding: 5;");
+
         TextField isValidDOBField = new TextField();
+        isValidDOBField.setPrefWidth(300);
+        isValidDOBField.setStyle("-fx-padding: 5;");
+
 
         // Add components to grid
-        grid.add(new Label("Enter your Name:"), 0, 0);
-        grid.add(petitionerNameField, 1, 0);
-        grid.add(new Label("Enter your Fiancee's Name:"), 0, 1);
-        grid.add(alienFianceeNameField, 1, 1);
-        grid.add(new Label("Enter your children's name(s):"), 0, 2);
-        grid.add(alienChildrenNamesField, 1, 2);
-        grid.add(new Label("Enter a Valid A Number:"), 0, 3);
-        grid.add(isValidANumberField, 1, 3);
-        grid.add(new Label("Enter a Valid Email:"), 0, 4);
-        grid.add(isValidEmailField, 1, 4);
-        grid.add(new Label("Enter a Valid Date of Birth:"), 0, 5);
-        grid.add(isValidDOBField, 1, 5);
-
+        grid.add(new Label("Enter your Name:"), 0, 1);
+        grid.add(petitionerNameField, 1, 1, 3, 1);  // Span 3 columns
+        grid.add(new Label("Enter your Fiancee's Name:"), 0, 2);
+        grid.add(alienFianceeNameField, 1, 2, 3, 1);
+        grid.add(new Label("Enter your children's name(s):"), 0, 3);
+        grid.add(alienChildrenNamesField, 1, 3, 3, 1);
+        grid.add(new Label("Enter a Valid A Number:"), 0, 4);
+        grid.add(isValidANumberField, 1, 4, 3, 1);
+        grid.add(new Label("Enter a Valid Email:"), 0, 5);
+        grid.add(isValidEmailField, 1, 5, 3, 1);
+        grid.add(new Label("Enter a Valid Date of Birth:"), 0, 6);
+        grid.add(isValidDOBField, 1, 6, 3, 1);
         // Submit button
         Button btn = new Button("Submit");
-        btn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-        grid.add(btn, 1, 6);
+        btn.setStyle("-fx-background-color: green; -fx-text-fill: white; -fx-padding: 10 20; -fx-font-size: 14px;");
+        grid.add(btn, 2, 7);
 
         btn.setOnAction(e -> {
-            PetitionLogic.PetitionData data = new PetitionLogic.PetitionData();
-            data.petitionerName = petitionerNameField.getText();
-            data.alienFianceeName = alienFianceeNameField.getText();
-            data.alienChildrenNames = alienChildrenNamesField.getText();
-            data.isValidDOB = isValidEmailField.getText();
-            data.isValidDOB = isValidDOBField.getText();
+            // Create an instance of DataEntry
+            DataEntry dataEntry = new DataEntry();
 
             try {
-                data.isValidANumber = Integer.parseInt(isValidANumberField.getText());
-            } catch (NumberFormatException ex) {
-                // Handle invalid A-Number input
-                // For example, set to a default value or show an error message
-                data.isValidANumber = -1; // Example default value indicating invalid input
+                // Pass data to DataEntry for processing
+                dataEntry.receiveData(
+                        petitionerNameField.getText(),
+                        alienFianceeNameField.getText(),
+                        alienChildrenNamesField.getText(),
+                        isValidANumberField.getText(),
+                        isValidEmailField.getText(),
+                        isValidDOBField.getText()
+                );
+
+                // Check if data is stored correctly
+                PetitionLogic.PetitionData storedData = PetitionDataStorage.getPetitionData(petitionerNameField.getText());
+                if (storedData != null && storedData.petitionerName.equals(petitionerNameField.getText())) {
+                    // Data stored successfully
+                    System.out.println("Data stored in hashmap: " + storedData);  // Print the stored data
+
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Submission Successful");
+                    successAlert.setHeaderText(null);
+                    successAlert.setContentText("Your form has been submitted and stored successfully!");
+                    successAlert.showAndWait();
+                } else {
+                    // Data not stored correctly
+                    Alert failureAlert = new Alert(Alert.AlertType.ERROR);
+                    failureAlert.setTitle("Submission Error");
+                    failureAlert.setHeaderText("Storage Error");
+                    failureAlert.setContentText("There was an error storing your form. Please try again.");
+                    failureAlert.showAndWait();
+                }
+
+            } catch (IllegalArgumentException ex) {
+                // Show error alert
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Validation Error");
+                alert.setContentText(ex.getMessage());
+                alert.showAndWait();
+                primaryStage.close();
             }
-
-            boolean isEmailValid = PetitionLogic.isValidEmail(data.isValidEmail);
-            boolean isDOBValid = PetitionLogic.isValidDOB(data.isValidDOB);
-
-            PetitionLogic.addPetition(data.petitionerName, data);
-
-            PetitionLogic.PetitionData retrievedData = PetitionLogic.getPetition(data.petitionerName);
-            System.out.println("Retrieved Data: " + retrievedData); // For debugging, prints to console
-
-            // Show confirmation alert
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Submission Successful");
-            alert.setHeaderText(null);
-            alert.setContentText("You submitted your Form!");
-            alert.showAndWait();
-
-            primaryStage.close();
         });
 
-        Scene scene = new Scene(grid, 300, 275);
+        Scene scene = new Scene(grid, 600, 450);  // Adjusted dimensions
         primaryStage.setScene(scene);
         primaryStage.show();
     }

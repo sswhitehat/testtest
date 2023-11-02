@@ -22,7 +22,6 @@ class PetitionLogicTest {
         assertFalse(petitionLogic.isAccessGrantedUnderDifferentImmigrant());
         assertFalse(petitionLogic.isPetitionSubmitted());
         assertNull(petitionLogic.getPetitionData());
-        assertFalse(petitionLogic.getEligibilityCriteria());
         assertFalse(petitionLogic.isDuplicateCheckResults());
         fail("TEST FAIL FOR DEFAULT");
     }
@@ -57,7 +56,6 @@ class PetitionLogicTest {
         petition.setAccessGrantedUnderDifferentImmigrant(false);
         petition.setPetitionSubmitted(true);
         petition.setPetitionData(new Object());
-        petition.setEligibilityCriteria(true);
         List<String> validationErrors = petition.validatePetition();
         //CHECK IF IT IS EMPTY AND VALIDATE
         assertNotNull(validationErrors);
@@ -74,7 +72,6 @@ class PetitionLogicTest {
         petition.setAlienFianceeName("");
         petition.setAlienChildrenNames(null);
         petition.setPetitionData(null);
-        petition.setEligibilityCriteria(false);
         validationErrors = petition.validatePetition();
         assertFalse(validationErrors.isEmpty());
 
@@ -155,7 +152,6 @@ class PetitionLogicTest {
         petition.setAccessGrantedUnderDifferentImmigrant(false);
         petition.setPetitionSubmitted(true);
         petition.setPetitionData(new Object());
-        petition.setEligibilityCriteria(true);
         // CHECK USING A BOOL LATER THAT I WILL IMPLEMENT FROM EITHER DB OR ARRAY OR WHATEVER STRUCT WE CHOOSE TO HOLD DATA
         boolean isDuplicate = petition.checkForDuplicates();
         // TRUE BECAUSE THE SYSTEM SHOULD IDENTIFY IF ALREADY IN SYSTEM
@@ -168,7 +164,6 @@ class PetitionLogicTest {
         newPetition.setAccessGrantedUnderDifferentImmigrant(true);
         newPetition.setPetitionSubmitted(false);
         newPetition.setPetitionData(new Object());
-        newPetition.setEligibilityCriteria(true);
         // SAME AS ABOVE BUT THE OTHER WAY AROUND
         boolean isNewPetitionDuplicate = newPetition.checkForDuplicates();
         // FALSE SINCE NOT A DUPE
