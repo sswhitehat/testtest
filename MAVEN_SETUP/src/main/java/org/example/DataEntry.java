@@ -21,21 +21,28 @@ public class DataEntry {
         if (!isValidDOB(dob)) {
             throw new IllegalArgumentException("Invalid date of birth format");
         }
+
         int validANumber;
+        boolean isValidANumberFlag;
         try {
             validANumber = Integer.parseInt(aNumber);
+            // Assuming any positive integer is a valid A Number
+            isValidANumberFlag = validANumber > 0;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("A Number must be a valid integer");
+            validANumber = 0; // or any default invalid value
+            isValidANumberFlag = false;
         }
 
         // Create PetitionData object
-        PetitionLogic.PetitionData petitionData = new PetitionLogic.PetitionData();
-        petitionData.petitionerName = petitionerName;
-        petitionData.alienFianceeName = alienFianceeName;
-        petitionData.alienChildrenNames = alienChildrenNames;
-        petitionData.isValidANumber = validANumber;
-        petitionData.isValidEmail = email;
-        petitionData.isValidDOB = dob;
+        PetitionLogic.PetitionData petitionData = new PetitionLogic.PetitionData(
+                petitionerName,
+                alienFianceeName,
+                alienChildrenNames,
+                validANumber, // Pass the integer value
+                isValidANumberFlag, // Pass the boolean flag for A Number validity
+                isValidEmail(email), // Pass the result of validation
+                isValidDOB(dob) // Pass the result of validation
+        );
 
         // Pass data to PetitionDataStorage
         PetitionDataStorage.storePetitionData(petitionData);

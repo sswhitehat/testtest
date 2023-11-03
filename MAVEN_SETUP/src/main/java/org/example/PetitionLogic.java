@@ -6,32 +6,22 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class PetitionLogic {
-    
-    String petitionerName;
-    String alienFianceeName;
-    String alienChildrenNames;
-    Boolean isValidANumber;
-    Boolean isValidEmail;
-    Boolean isValidDOB;
 
-    // Constructor
+    private String petitionerName;
+    private String alienFianceeName;
+    private String alienChildrenNames;
+    private int isValidANumber;
+    private Boolean isValidEmail;
+    private Boolean isValidDOB;
+
+    // Default Constructor
     public PetitionLogic() {
-        this.petitionerName = "";
-        this.alienFianceeName = "";
-        this.alienChildrenNames = "";
-        this.isValidANumber = false;
-        this.isValidEmail = false;
-        this.isValidDOB = false;
+        this("", "", "", 0, false, false);
     }
-    
-    // Constructor
-    public PetitionLogic(String petitionerName,
-    String alienFianceeName,
-    String alienChildrenNames,
-    Boolean isValidANumber,
-    Boolean isValidEmail,
-    Boolean isValidDOB) {
-        
+
+    // Parameterized Constructor
+    public PetitionLogic(String petitionerName, String alienFianceeName, String alienChildrenNames,
+                         int isValidANumber, Boolean isValidEmail, Boolean isValidDOB) {
         this.petitionerName = petitionerName;
         this.alienFianceeName = alienFianceeName;
         this.alienChildrenNames = alienChildrenNames;
@@ -66,17 +56,32 @@ public class PetitionLogic {
         }
     }
 
-    // Other business logic methods as needed
+    // Method to convert to PetitionData
+    public PetitionData toPetitionData() {
+        // Assuming isValidANumber > 0 means the A Number is valid
+        boolean isValidANumberFlag = Integer.toString(isValidANumber).length() == 8 || Integer.toString(isValidANumber).length() == 9;
+        return new PetitionData(petitionerName, alienFianceeName, alienChildrenNames, isValidANumber, isValidANumberFlag, isValidEmail, isValidDOB);
+    }
 
-    // // Nested class for PetitionData (if still needed)
-    // public static class PetitionData {
-    //     String petitionerName;
-    //     String alienFianceeName;
-    //     String alienChildrenNames;
-    //     int isValidANumber;
-    //     String isValidEmail;
-    //     String isValidDOB;
+    // Nested class for PetitionData
+    public static class PetitionData {
+        String petitionerName;
+        String alienFianceeName;
+        String alienChildrenNames;
+        int aNumber; // Actual A Number
+        boolean isValidANumber; // Flag for A Number validity
+        boolean isValidEmail;
+        boolean isValidDOB;
 
-    //     // toString method and other methods as needed
-    // }
+        public PetitionData(String petitionerName, String alienFianceeName, String alienChildrenNames,
+                            int aNumber, boolean isValidANumber, boolean isValidEmail, boolean isValidDOB) {
+            this.petitionerName = petitionerName;
+            this.alienFianceeName = alienFianceeName;
+            this.alienChildrenNames = alienChildrenNames;
+            this.aNumber = aNumber;
+            this.isValidANumber = isValidANumber;
+            this.isValidEmail = isValidEmail;
+            this.isValidDOB = isValidDOB;
+        }
+    }
 }

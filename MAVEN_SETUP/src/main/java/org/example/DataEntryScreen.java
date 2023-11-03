@@ -114,13 +114,13 @@ public class DataEntryScreen extends Application {
                 alert.setHeaderText("Validation Error");
                 alert.setContentText(ex.getMessage());
                 alert.showAndWait();
-                primaryStage.close();
             }
         });
 
         Scene scene = new Scene(grid, 600, 450);  // Adjusted dimensions
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
