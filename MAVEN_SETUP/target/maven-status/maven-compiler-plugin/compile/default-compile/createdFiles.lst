@@ -2,8 +2,11 @@ org\example\PetitionLogic$PetitionData.class
 org\example\PetitionDataStorage.class
 org\example\Workflow.class
 org\example\DataEntryScreen.class
-com\example\User.class
-com\example\ReviewScreenController.class
 org\example\DataEntry.class
+org\example\ReviewScreenController.class
+org\example\ApprovalScreen.class
+org\example\Review.class
+org\example\ReviewScreen.class
+org\example\User.class
 org\example\PetitionLogic.class
-com\example\ApprovalScreenController.class
+org\example\ApprovalScreenController.class

@@ -3,6 +3,7 @@ package org.example;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetitionLogic {
@@ -10,39 +11,44 @@ public class PetitionLogic {
     private String petitionerName;
     private String alienFianceeName;
     private String alienChildrenNames;
-    private int isValidANumber;
-    private Boolean isValidEmail;
-    private Boolean isValidDOB;
-
-    // Default Constructor
-    public PetitionLogic() {
-        this("", "", "", 0, false, false);
-    }
+    private int aNumber; // A-Number as an integer
+    private String email;
+    private String dob; // Date of Birth as String
 
     // Parameterized Constructor
     public PetitionLogic(String petitionerName, String alienFianceeName, String alienChildrenNames,
-                         int isValidANumber, Boolean isValidEmail, Boolean isValidDOB) {
+                         int aNumber, String email, String dob) {
         this.petitionerName = petitionerName;
         this.alienFianceeName = alienFianceeName;
         this.alienChildrenNames = alienChildrenNames;
-        this.isValidANumber = isValidANumber;
-        this.isValidEmail = isValidEmail;
-        this.isValidDOB = isValidDOB;
+        this.aNumber = aNumber;
+        this.email = email;
+        this.dob = dob;
     }
 
     // Method to validate the petition data
-    public List<String> validatePetition(PetitionData petitionData) {
-        // Implement validation logic here
-        // Return a list of validation errors or an empty list if valid
-        return null;
-    }
+    public List<String> validatePetition() {
+        List<String> errors = new ArrayList<>();
 
-    // Method to check for duplicates
-    public boolean checkForDuplicates(String petitionerName) {
-        return PetitionDataStorage.isDuplicatePetition(petitionerName);
+        if (!isValidANumber(this.aNumber)) {
+            errors.add("Invalid A-Number");
+        }
+        if (!isValidEmail(this.email)) {
+            errors.add("Invalid Email");
+        }
+        if (!isValidDOB(this.dob)) {
+            errors.add("Invalid Date of Birth");
+        }
+
+        return errors;
     }
 
     // Static utility methods
+    public static boolean isValidANumber(int aNumber) {
+        // Assuming A-Number should be 8 or 9 digits long
+        return Integer.toString(aNumber).length() == 8 || Integer.toString(aNumber).length() == 9;
+    }
+
     public static boolean isValidEmail(String email) {
         return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
@@ -58,23 +64,37 @@ public class PetitionLogic {
 
     // Method to convert to PetitionData
     public PetitionData toPetitionData() {
-        // Assuming isValidANumber > 0 means the A Number is valid
-        boolean isValidANumberFlag = Integer.toString(isValidANumber).length() == 8 || Integer.toString(isValidANumber).length() == 9;
-        return new PetitionData(petitionerName, alienFianceeName, alienChildrenNames, isValidANumber, isValidANumberFlag, isValidEmail, isValidDOB);
+        boolean isValidANumberFlag = isValidANumber(this.aNumber);
+        boolean isValidEmailFlag = isValidEmail(this.email);
+        boolean isValidDOBFlag = isValidDOB(this.dob);
+        return new PetitionData(
+                petitionerName,
+                alienFianceeName,
+                alienChildrenNames,
+                aNumber,
+                isValidANumber(aNumber),
+                isValidEmail(email),
+                isValidDOB(dob),
+                email, // Pass the email
+                dob   // Pass the dob
+        );
     }
 
     // Nested class for PetitionData
     public static class PetitionData {
-        String petitionerName;
-        String alienFianceeName;
-        String alienChildrenNames;
-        int aNumber; // Actual A Number
-        boolean isValidANumber; // Flag for A Number validity
-        boolean isValidEmail;
-        boolean isValidDOB;
+        private String petitionerName;
+        private String alienFianceeName;
+        private String alienChildrenNames;
+        private int aNumber; // A-Number as an integer
+        private boolean isValidANumber;
+        private boolean isValidEmail;
+        private boolean isValidDOB;
+        private String email; // Email as String
+        private String dob; // Date of Birth as String
 
+        // Constructor
         public PetitionData(String petitionerName, String alienFianceeName, String alienChildrenNames,
-                            int aNumber, boolean isValidANumber, boolean isValidEmail, boolean isValidDOB) {
+                            int aNumber, boolean isValidANumber, boolean isValidEmail, boolean isValidDOB, String email, String dob) {
             this.petitionerName = petitionerName;
             this.alienFianceeName = alienFianceeName;
             this.alienChildrenNames = alienChildrenNames;
@@ -82,6 +102,46 @@ public class PetitionLogic {
             this.isValidANumber = isValidANumber;
             this.isValidEmail = isValidEmail;
             this.isValidDOB = isValidDOB;
+            this.email = email;  // Use the passed parameter
+            this.dob = dob;
+        }
+
+        // Getters
+        public String getPetitionerName() {
+            return petitionerName;
+        }
+
+        public String getAlienFianceeName() {
+            return alienFianceeName;
+        }
+
+        public String getAlienChildrenNames() {
+            return alienChildrenNames;
+        }
+
+        public int getANumber() {
+            return aNumber;
+        }
+
+        public boolean getIsValidANumber() {
+            return isValidANumber;
+        }
+
+        public boolean getIsValidEmail() {
+            return isValidEmail;
+        }
+
+        public boolean getIsValidDOB() {
+            return isValidDOB;
+        }
+
+        // Added getters for email and dob
+        public String getEmail() {
+            return email;
+        }
+
+        public String getDOB() {
+            return dob;
         }
     }
-}
+    }

@@ -1,30 +1,68 @@
-package com.example;
-
+package org.example;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
+
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class ReviewScreenController {
+    @FXML private Label labelID;
+    @FXML private Label labelName;
+    @FXML private Label labelF_name;
+    @FXML private Label labelC_name;
+
+    @FXML private Label labelDOB;
+    @FXML private Label labelImmigrantNumber;
+    @FXML private Label labelEmail;
+
+    @FXML private Button nextButton;
+
+    @FXML private Button sendToApprovalButton;
 
     @FXML
-    private Label labelC_name;
+    private CheckBox isValidEmailCheckbox;
+    @FXML
+    private CheckBox isValidDOBCheckbox;
+    @FXML
+    private CheckBox isValidANumberCheckbox;
+    @FXML
+    private CheckBox isDuplicatePetitionCheckbox;
+
+    private Iterator<Map.Entry<String, PetitionLogic.PetitionData>> petitionIterator;
+    private Map.Entry<String, PetitionLogic.PetitionData> currentPetitionEntry;
 
     @FXML
-    private Label labelDOB;
+    public void initialize() {
+        // Initialize the iterator
+        petitionIterator = PetitionDataStorage.getAllPetitions().entrySet().iterator();
+        loadNextPetition();
+    }
 
     @FXML
-    private Label labelF_name;
+    public void nextPetition() {
+        loadNextPetition();
+    }
 
-    @FXML
-    private Label labelID;
-
-    @FXML
-    private Label labelName;
-
-    @FXML
-    private Button sendInfo;
+    private void loadNextPetition() {
+        if (petitionIterator.hasNext()) {
+            currentPetitionEntry = petitionIterator.next();
+            PetitionLogic.PetitionData petitionData = currentPetitionEntry.getValue();
+            // Update labels with petition data
+            labelName.setText(petitionData.getPetitionerName());
+            labelF_name.setText(petitionData.getAlienFianceeName());
+            labelC_name.setText(petitionData.getAlienChildrenNames());
+            labelImmigrantNumber.setText(String.valueOf(petitionData.getANumber())); // Assuming getANumber() returns a String
+            labelEmail.setText(petitionData.getEmail()); // You need to implement getEmail() in PetitionData
+            labelDOB.setText(petitionData.getDOB()); // You need to implement getDOB() in PetitionData
+        } else {
+            // Reset the iterator and disable the next button if there are no more petitions
+            petitionIterator = PetitionDataStorage.getAllPetitions().entrySet().iterator();
+            nextButton.setDisable(true);
+        }
+    }
 
     @FXML
     void sendInfotoApproval(MouseEvent event) {
@@ -34,6 +72,4 @@ public class ReviewScreenController {
         successAlert.setContentText("The information is sent to approval.");
         successAlert.showAndWait();
     }
-
 }
-

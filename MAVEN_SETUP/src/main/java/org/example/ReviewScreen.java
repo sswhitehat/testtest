@@ -10,7 +10,7 @@ public class ReviewScreen extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReviewScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReviewScreen.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Review Screen");
         primaryStage.setScene(new Scene(root));

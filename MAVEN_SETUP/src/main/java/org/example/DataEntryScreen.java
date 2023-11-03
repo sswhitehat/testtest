@@ -89,7 +89,7 @@ public class DataEntryScreen extends Application {
 
                 // Check if data is stored correctly
                 PetitionLogic.PetitionData storedData = PetitionDataStorage.getPetitionData(petitionerNameField.getText());
-                if (storedData != null && storedData.petitionerName.equals(petitionerNameField.getText())) {
+                if (storedData != null && storedData.getPetitionerName().equals(petitionerNameField.getText())) {
                     // Data stored successfully
                     System.out.println("Data stored in hashmap: " + storedData);  // Print the stored data
 

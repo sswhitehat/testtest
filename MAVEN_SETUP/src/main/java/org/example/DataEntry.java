@@ -14,35 +14,37 @@ public class DataEntry {
     // Method to receive data from DataEntryScreen
     public void receiveData(String petitionerName, String alienFianceeName, String alienChildrenNames,
                             String aNumber, String email, String dob) {
-        // Validate the data
-        if (!isValidEmail(email)) {
+        // Validate the data and set flags
+        boolean isValidEmailFlag = isValidEmail(email);
+        if (!isValidEmailFlag) {
             throw new IllegalArgumentException("Invalid email format");
         }
-        if (!isValidDOB(dob)) {
+
+        boolean isValidDOBFlag = isValidDOB(dob);
+        if (!isValidDOBFlag) {
             throw new IllegalArgumentException("Invalid date of birth format");
         }
 
-        int validANumber;
-        boolean isValidANumberFlag;
+        int validANumber = 0;
+        boolean isValidANumberFlag = false;
         try {
             validANumber = Integer.parseInt(aNumber);
             // Assuming any positive integer is a valid A Number
             isValidANumberFlag = validANumber > 0;
         } catch (NumberFormatException e) {
-            validANumber = 0; // or any default invalid value
-            isValidANumberFlag = false;
+            // If parsing fails, validANumber remains 0 and isValidANumberFlag remains false
         }
 
-        // Create PetitionData object
+        // Create PetitionData object with the validated data and flags
         PetitionLogic.PetitionData petitionData = new PetitionLogic.PetitionData(
                 petitionerName,
                 alienFianceeName,
                 alienChildrenNames,
-                validANumber, // Pass the integer value
-                isValidANumberFlag, // Pass the boolean flag for A Number validity
-                isValidEmail(email), // Pass the result of validation
-                isValidDOB(dob) // Pass the result of validation
-        );
+                validANumber,
+                isValidANumberFlag,
+                isValidEmailFlag,
+                isValidDOBFlag,
+                email, dob);
 
         // Pass data to PetitionDataStorage
         PetitionDataStorage.storePetitionData(petitionData);

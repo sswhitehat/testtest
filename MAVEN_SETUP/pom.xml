@@ -67,13 +67,23 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.DataEntryScreen</mainClass>
+              <mainClass>org.example.ApprovalScreen</mainClass>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.fxml</include>
+          <!-- Include other resource files as needed -->
+        </includes>
+      </resource>
+    </resources>
   </build>
+
 
   <profiles>
     <profile>
