@@ -1,4 +1,3 @@
-/*
 package org.example;
 
 import javafx.application.Application;
@@ -22,4 +21,3 @@ public class ReviewScreen extends Application {
         launch(args);
     }
 }
-*/
